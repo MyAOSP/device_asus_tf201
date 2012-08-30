@@ -22,11 +22,11 @@ $(call inherit-product-if-exists, vendor/asus/tf201/tf201-vendor.mk)
 DEVICE_PACKAGE_OVERLAYS += device/asus/tf201/overlay
 
 # Prebuilt kernel location
-ifeq ($(TARGET_PREBUILT_KERNEL),)
-	LOCAL_KERNEL := device/asus/tf201/kernel
-else
-	LOCAL_KERNEL := $(TARGET_PREBUILT_KERNEL)
-endif
+#ifeq ($(TARGET_PREBUILT_KERNEL),)
+#	LOCAL_KERNEL := device/asus/tf201/kernel
+#else
+#	LOCAL_KERNEL := $(TARGET_PREBUILT_KERNEL)
+#endif
 
 # Files needed for boot image
 PRODUCT_COPY_FILES += \
@@ -36,7 +36,7 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/ramdisk/init.cardhu.usb.rc:root/init.cardhu.usb.rc \
     $(LOCAL_PATH)/ramdisk/init.cardhu.keyboard.rc:root/init.cardhu.keyboard.rc \
     $(LOCAL_PATH)/ramdisk/init.cardhu.cpu.rc:root/init.cardhu.cpu.rc \
-    $(LOCAL_PATH)/prebuilt/keyswap::root/sbin/keyswap \
+    $(LOCAL_PATH)/prebuilt/keyswap::root/sbin/keyswap 
 
 # Kernel modules
 PRODUCT_COPY_FILES += \
@@ -70,10 +70,9 @@ $(call inherit-product, $(LOCAL_PATH)/keylayout/l10n/l10n.mk)
 
 # Camera/WiFi/BT Firmware
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/prebuilt/nvram_4329.txt:system/etc/nvram_nh615.txt \
     $(LOCAL_PATH)/prebuilt/nvram_4329.txt:system/etc/nvram_4329.txt \
-    $(LOCAL_PATH)/prebuilt/firmware/BCM4329B1_002.002.023.0797.0863.hcd:system/etc/firmware/BCM4329B1_002.002.023.0797.0863.hcd \
-    $(LOCAL_PATH)/prebuilt/firmware/TF201-RS_M6Mo.bin:system/etc/firmware/camera/TF201-RS_M6Mo.bin \
+    $(LOCAL_PATH)/prebuilt/firmware/bcm4329.hcd:system/etc/firmware/bcm4329.hcd \
+    $(LOCAL_PATH)/prebuilt/firmware/TF201-RS_M6Mo.bin:system/etc/firmware/camera/TF201-RS_M6Mo.bin 
 
 # These are the hardware-specific features
 PRODUCT_COPY_FILES += \
@@ -160,8 +159,11 @@ PRODUCT_COPY_FILES += \
 # Inherit tablet dalvik settings
 $(call inherit-product, frameworks/native/build/tablet-dalvik-heap.mk)
 
-# Call the vendor to setup propiatory files
-$(call inherit-product-if-exists, vendor/asus/tf201/tf201-vendor.mk)
+# Vendor firmware
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/vendor/firmware/fw_bcmdhd.bin:system/vendor/firmware/fw_bcmdhd.bin \
+    $(LOCAL_PATH)/vendor/firmware/fw_bcmdhd_apsta.bin:system/vendor/firmware/fw_bcmdhd_apsta.bin \
+    $(LOCAL_PATH)/vendor/firmware/fw_bcmdhd_p2p.bin:system/vendor/firmware/fw_bcmdhd_p2p.bin 
 
 # Copy bcm4329 firmware
 $(call inherit-product-if-exists, hardware/broadcom/wlan/bcmdhd/firmware/bcm4329/device-bcm.mk)

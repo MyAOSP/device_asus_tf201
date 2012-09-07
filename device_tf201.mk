@@ -30,7 +30,6 @@ DEVICE_PACKAGE_OVERLAYS += device/asus/tf201/overlay
 
 # Files needed for boot image
 PRODUCT_COPY_FILES += \
-    $(LOCAL_KERNEL):kernel \
     $(LOCAL_PATH)/ramdisk/init.cardhu.rc:root/init.cardhu.rc\
     $(LOCAL_PATH)/ramdisk/ueventd.cardhu.rc:root/ueventd.cardhu.rc \
     $(LOCAL_PATH)/ramdisk/init.cardhu.usb.rc:root/init.cardhu.usb.rc \

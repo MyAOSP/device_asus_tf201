@@ -4,10 +4,11 @@ include $(CLEAR_VARS)
 LOCAL_MODULE_TAGS := optional
 
 LOCAL_SRC_FILES := $(call all-java-files-under, src)
+LOCAL_SRC_FILES += $(call all-java-files-under, ../asusdec/java)
 
 LOCAL_PACKAGE_NAME := AutoParts_tfp
+LOCAL_PROGUARD_FLAG_FILES := proguard.flags
 LOCAL_CERTIFICATE := platform
-LOCAL_JAVA_LIBRARIES := com.cyanogenmod.asusdec
 
 include $(BUILD_PACKAGE)
 
